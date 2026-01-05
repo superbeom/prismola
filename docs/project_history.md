@@ -2,6 +2,17 @@
 
 > **참고**: 최신 항목이 상단에 위치합니다.
 
+## [2026-01-05] 네이버 블로그 스크래퍼 및 데이터 도구 구현
+- **액션**: 블로그 영어 표현 수집을 위한 파이썬 도구 개발.
+    - `scraper/scrape_expressions.py`: 네이버 블로그 크롤링 및 타이틀 정제.
+    - `scraper/export_n8n_data.py`: 수집된 데이터를 n8n(JSON) 및 Google Sheets(CSV) 포맷으로 변환.
+- **액션**: 스크래퍼 사용 가이드 문서화.
+    - `docs/scraper_usage.md`: 설치, 설정(Target ID), 실행, 문제 해결 방법 상세 기술.
+    - 개인정보 보호를 위해 타겟 블로그 ID를 `YOUR_BLOG_ID`로 변환하고 안전 장치 추가.
+- **데이터**: `n8n_code_input.json` (500+ expressions) 데이터 정제 완료 (Double space -> `vs` 변환 등).
+
+---
+
 ## [2026-01-05] Supabase 스키마 설정 및 초기화
 - **액션**: `prismola` 스키마 기반 Supabase 설정 완료.
     - `database/001_init_schema.sql` 생성: `posts` 테이블(JSONB) 포함.

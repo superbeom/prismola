@@ -2,6 +2,15 @@
 
 > **참고**: 최신 항목이 상단에 위치합니다.
 
+## [2026-01-05] Supabase 스키마 설정 및 초기화
+- **액션**: `prismola` 스키마 기반 Supabase 설정 완료.
+    - `database/001_init_schema.sql` 생성: `posts` 테이블(JSONB) 포함.
+    - **변경**: `profiles` 테이블(회원 기능)은 `future_todos.md`로 이관하고 초기 스키마에서 제외.
+- **액션**: Next.js 연동 설정.
+    - `lib/supabase/` 클라이언트(Server/Browser) 구현.
+    - `middleware.ts`: 인증 로직 주석 처리(공개 접근 허용).
+    - 모듈 에러 해결(`@supabase/ssr` 등 재설치).
+
 ---
 
 ## [2026-01-05] Supabase 멀티 프로젝트 전략 도입 및 문서화 완성
@@ -12,11 +21,15 @@
     - `agent_workflows.md` 가이드 문서 생성.
 - **문서 현행화**: `update_docs` 워크플로우가 참조하는 모든 문서(`future_todos.md`, `feature_ideas.md` 등)를 생성하여 정합성 확보.
 
+---
+
 ## [2026-01-05] 에이전트 워크플로우 생성
 - **액션**: `.agent/workflows` 폴더에 생산성 향상 워크플로우 추가.
     - `restore_context.md`: 프로젝트 컨텍스트 파일 일괄 로드.
     - `generate_commit.md`: Git 컨벤션에 따른 커밋 메시지 스크립트(`commit_msg.sh`) 생성.
 - **액션**: `.gitignore`에 `commit_msg.sh` 추가.
+
+---
 
 ## [2026-01-05] 문서화 구조 고도화 (v2)
 - **액션**: `project_context.md` 구조를 `example_context.md` 스타일로 전면 개편.
@@ -25,6 +38,8 @@
     - `Workflow Guidelines`에 `git_convention.md`와 `git_branch_strategy.md` 참조 추가.
 - **액션**: `docs/features_list.md` 및 `docs/database_schema.md` 생성하여 기획 상세 내용 분리.
 - **액션**: `docs/conversation_history.md` 및 `docs/brainstorm.md` 내용을 통합 후 삭제.
+
+---
 
 ## [2026-01-05] 문서화 구조 설정
 - **액션**: `docs` 폴더 생성 및 `task.md` 초기화.

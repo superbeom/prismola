@@ -9,5 +9,7 @@
 
 ## Improvements (개선 사항)
 
+- [ ] `profiles` 테이블 생성 및 회원가입/로그인 구현 (Service Isolation Strategy 적용)
+
 - [ ] (예시) 테스트 코드 커버리지 80% 달성
 - [ ] (예시) CI/CD 파이프라인 최적화

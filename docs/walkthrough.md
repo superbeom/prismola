@@ -4,6 +4,25 @@
 
 ---
 
+## v0.2.0: Supabase 데이터베이스 통합
+**날짜**: 2026-01-05
+
+### 목표
+다국어 콘텐츠 데이터를 저장하고 관리하기 위한 Supabase 데이터베이스 스키마와 관리 포인트를 설정합니다.
+
+### 수행 단계
+1.  **스키마 설정 (`database/001_init_schema.sql`)**:
+    - **멀티 스키마 전략**: 메인 스키마와 분리된 `prismola` 스키마 생성.
+    - **테이블 구조**: `posts` 테이블에 `JSONB` 컬럼을 적용하여 다국어 데이터를 유연하게 저장하도록 설계.
+    - **보안 (RLS)**: `anon` (익명 사용자)에게 읽기 권한을 허용하여 공개 블로그 형태 지원. 쓰기 권한은 `service_role`로 제한.
+    - *참고*: 회원 관리(`profiles`) 테이블은 초기 요구사항에서 제외되어 `future_todos.md`로 연기됨.
+2.  **Next.js 클라이언트 연동**:
+    - **패키지 설치**: `@supabase/ssr`, `@supabase/supabase-js`.
+    - **클라이언트 유틸리티**: `lib/supabase/` 내에 `createBrowserSupabase` (Browser), `createServerSupabase` (Server) 구현.
+    - **미들웨어 (`middleware.ts`)**: 초기 단계에서는 인증 검증 로직을 비활성화하여 세션 리프레시만 수행하도록 설정.
+
+---
+
 ## v0.1.2: 에이전트 워크플로우 통합
 **날짜**: 2026-01-05
 

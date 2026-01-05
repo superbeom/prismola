@@ -7,7 +7,7 @@
 - [ ] 프로젝트 셋업
   - [x] Next.js 프로젝트 초기화 (`prismola`)
   - [x] 문서화 및 컨텍스트 규칙 설정 (`docs/` & Workflows)
-  - [ ] Supabase 프로젝트 생성 및 테이블(JSONB 적용) 설정
+  - [x] Supabase 프로젝트 생성 및 테이블(JSONB 적용) 설정
   - [ ] Google Sheets 데이터 소스 준비
 - [ ] n8n 워크플로우 구현
   - [ ] Google Sheets 데이터 읽기

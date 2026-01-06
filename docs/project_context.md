@@ -108,7 +108,11 @@ prismola/
 │   ├── walkthrough.md       # 구현 상세 워크스루
 │   ├── git_convention.md    # 커밋 메시지 규칙
 │   ├── git_branch_strategy.md # 브랜치 전략
-│   └── scraper_usage.md     # 파이썬 스크래퍼 사용 가이드
+│   ├── scraper_usage.md     # 파이썬 스크래퍼 사용 가이드
+│   └── n8n_workflow_guide.md # n8n 워크플로우 가이드
+├── n8n/                 # n8n 워크플로우 리소스
+│   ├── workflows/       # 워크플로우 JSON 템플릿
+│   └── code/            # Code Node 자바스크립트
 ├── scraper/             # 파이썬 크롤러 및 유틸리티
 │   ├── output/          # 스크래핑 결과물 저장소 (gitignored)
 │   ├── scrape_expressions.py # 네이버 블로그 표현 추출 스크립트

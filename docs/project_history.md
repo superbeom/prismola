@@ -2,6 +2,18 @@
 
 > **참고**: 최신 항목이 상단에 위치합니다.
 
+## [2026-01-06] n8n 워크플로우 v3.0 (Extreme Mastery) 완성
+- **액션**: 'Extreme Mastery' 수준의 심층 언어 분석 콘텐츠 생성을 위한 n8n 코드 노드(01~05) 고도화.
+    - `01_load_and_transform.js`: 4개 국어 병렬 처리를 위한 Fan-out 구축.
+    - `02_construct_llm_prompt.js`: 심리학, 사회 지능, 뉘앙스 매핑을 포함한 고품질 프롬프트 설계.
+    - `04_merge_languages.js`: 분산된 데이터를 유실 없이 프리미엄 DB 레코드로 병합.
+- **액션**: Groq Orpheus 모델 기반 다중 목소리(Multi-Voice) TTS 구현.
+    - `05_prepare_tts_request.js`: 대화문 역할(A, B)에 따라 Hannah & Troy 목소리 자동 할당.
+- **문서**: `n8n_workflow_guide.md` (완전판 가이드) 및 `features_specification.md` (카드 세부 명세) 작성.
+- **파일**: `n8n_workflow_template.json` 워크플로우 템플릿 배포 및 보안 검토 완료.
+
+---
+
 ## [2026-01-05] 네이버 블로그 스크래퍼 및 데이터 도구 구현
 - **액션**: 블로그 영어 표현 수집을 위한 파이썬 도구 개발.
     - `scraper/scrape_expressions.py`: 네이버 블로그 크롤링 및 타이틀 정제.

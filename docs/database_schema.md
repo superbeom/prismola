@@ -13,8 +13,9 @@
 | `id` | `uuid` | Primary Key. 기본값 `gen_random_uuid()`. |
 | `expression` | `text` | 핵심 영어 표현 (예: "Cold feet"). 검색 및 인덱싱 용도. |
 | `content` | `jsonb` | **핵심**. 4개 국어 콘텐츠 데이터를 담는 JSON 객체. |
-| `audio_url` | `text` | Supabase Storage에 저장된 오디오 파일 URL. |
-| `image_url` | `text` | (Optional) 대표 이미지 URL. |
+| `summary` | `jsonb` | UI 리스트 뷰를 위한 다국어 요약 설명. |
+| `tags` | `text[]` | 콘텐츠에서 추출된 검색 가능한 태그 배열. |
+| `audio_segments` | `jsonb` | 역할별(Speaker) 오디오 URL 및 메타데이터 배열. |
 | `created_at` | `timestamptz` | 생성 일시. 기본값 `now()`. |
 | `updated_at` | `timestamptz` | 수정 일시. |
 

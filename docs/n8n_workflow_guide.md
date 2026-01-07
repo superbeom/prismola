@@ -39,6 +39,9 @@
 - **[03_parse_llm_response.js]**: LLM 응답에서 JSON 데이터를 안전하게 파싱.
 - **[04_merge_languages.js]**: 다국어 데이터를 하나로 통합하여 프리미엄 DB 레코드 생성.
 - **[05_prepare_tts_request.js]**: 대화문 역할(A, B)별 멀티 보이스 TTS 생성을 위한 분리 로직.
+- **[06_map_audio_upload.js]**: TTS 바이너리를 Supabase Storage 업로드 형식으로 매핑.
+- **[07_aggregate_audio_segments.js]**: 업로드된 오디오 URL을 수집하여 최종 배열로 병합.
+- **[08_prepare_final_upsert.js]**: DB Upsert를 위한 최종 데이터 정제.
 
 ---
 
@@ -88,6 +91,42 @@
     - `voice`: `{{ $json.tts_voice }}`
     - `response_format`: `{{ $json.tts_format }}`
   - **Response Format**: **`Binary`** (반드시 바이너리로 설정해야 함)
+
+### 5단계: Supabase 저장 (Storage & DB)
+생성된 콘텐츠와 오디오를 클라우드에 영구 저장합니다.
+공식 Supabase 노드는 파일 업로드를 지원하지 않으므로, **HTTP Request** 노드를 사용하여 직접 업로드합니다.
+
+- **사전 작업**: Supabase Dashboard > Storage에서 **`prismola`**라는 이름의 Bucket을 미리 생성해야 합니다. (폴더는 자동으로 생성되므로 Bucket만 있으면 됩니다.)
+- **Name**: `Upload to Storage`
+- **Method**: `POST`
+- **URL**: `https://<YOUR_PROJECT_REF>.supabase.co/storage/v1/object/prismola/{{ $json.storage_path }}`
+  - (참고: `storage_path`에 `posts/audio/{expression}/`가 포함되어 있음)
+- **Authentication**: `Generic Credential Type`
+- **Generic Auth Type**: `Header Auth`
+- **Header Auth**: `Supabase Header Auth`
+  - `Name`: `Authorization`
+  - `Value`: `Bearer <YOUR_SERVICE_ROLE_KEY>`
+- **Send Body**: `Binary`
+  - `Body Content Type`: `n8n Binary File`
+  - `Input Data Field Name`: `data`
+- **Options**: `Response`
+  - **Response Format**: `JSON`
+
+### 6단계: 데이터베이스 최종 적재 (Database Seeding)
+마지막으로 병합된 콘텐츠와 오디오 URL을 DB에 저장합니다.
+- **DB 업데이트**: Supabase PostgreSQL 노드 (Upsert)
+  - **Node**: `Supabase` (또는 PostgreSQL) -> `Insert or Update`
+  - **Operation**: `Upsert`
+  - **Schema**: `prismola`
+  - **Table**: `posts`
+  - **Column to Match on Conflict**: `expression` (이 컬럼을 기준으로 중복 여부 판단)
+  - **Values to Send**: Node 08의 출력값을 그대로 사용합니다.
+    - `expression`: `{{ $json.expression }}`
+    - `content`: `{{ JSON.stringify($json.content) }}` (PostgreSQL 노드 사용 시 문자열화 필요할 수 있음)
+    - `summary`: `{{ JSON.stringify($json.summary) }}`
+    - `tags`: `{{ $json.tags }}`
+    - `audio_segments`: `{{ JSON.stringify($json.audio_segments) }}`
+    - `updated_at`: `{{ $json.updated_at }}`
 
 ---
 

@@ -4,6 +4,25 @@
 
 ---
 
+## v3.1.0: Audio Aggregation & Merge Logic 검증 완료
+**날짜**: 2026-01-07
+
+### 목표
+n8n 워크플로우 내에서 개별 업로드된 오디오 세그먼트와 LLM 메타데이터를 유실 없이 병합하여 최종 DB Upsert용 데이터를 생성합니다.
+
+### 수행 단계
+1.  **Merge 노드 통합**: Supabase Storage 업로드 결과와 원본 메타데이터(Node 06)를 병합하도록 워크플로우 구조 개선.
+2.  **데이터 무결성 검증**: `example_output.json` 분석 결과, 4개 국어 콘텐츠와 오디오 URL(`audio_segments`)이 완벽하게 매핑됨을 확인.
+3.  **방어 코드 적용**: `07_aggregate_audio_segments.js` 및 `08_prepare_final_upsert.js`에 데이터 유실 시 에러를 발생시키는 검증 로직 추가.
+
+### 검증 결과 (Pass)
+- **Expression**: "go ahead" 매핑 성공.
+- **Multi-language Content**: en, ko, ja, es 모든 필드 데이터 존재.
+- **Audio Segments**: Hannah & Troy 목소리별 3개 세그먼트 URL(Supabase Storage) 정상 수집.
+- **Schema Match**: `database_schema.md`에서 정의한 `JSONB` 구조와 100% 일치.
+
+---
+
 ## v3.0.0: 'Extreme Mastery' n8n 워크플로우 고도화
 **날짜**: 2026-01-06
 

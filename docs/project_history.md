@@ -2,6 +2,12 @@
 
 > **참고**: 최신 항목이 상단에 위치합니다.
 
+## [2026-01-06] 데이터베이스 스키마 고도화 및 레거시 정리 (Extreme Mastery V3.0)
+- **액션**: 'Extreme Mastery V3.0' 대응을 위한 DB 스키마 확장 및 최적화 완료.
+    - `002_extreme_mastery_schema.sql`: `summary`, `tags`, `audio_segments` 신규 컬럼 및 GIN 인덱스 추가.
+    - `003_cleanup_schema.sql`: 레거시 컬럼(`audio_url`, `image_url`) 완전 제거.
+    - `updated_at` 자동 업데이트 트리거를 통한 정밀한 데이터 관리 기여.
+
 ## [2026-01-06] n8n 워크플로우 v3.0 (Extreme Mastery) 완성
 - **액션**: 'Extreme Mastery' 수준의 심층 언어 분석 콘텐츠 생성을 위한 n8n 코드 노드(01~05) 고도화.
     - `01_load_and_transform.js`: 4개 국어 병렬 처리를 위한 Fan-out 구축.

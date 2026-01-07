@@ -19,7 +19,15 @@
     - [x] 사용 방법 및 주의사항 섹션 추가
     - [x] 가이드 본문 보강 (n8n JSON 임포트 안내 등)
   - [x] 최종 워크플로우 템플릿 제공 및 안내
+- [x] 데이터베이스 고도화 및 데이터 업로드
+  - [x] DB 테이블 구조 최적화 (Extreme Mastery V3.0 대응)
+  - [x] 오디오 세그먼트 저장을 위한 스키마 확장
+  - [x] DB 권한 및 RLS 정책 수정 (Permission Denied 해결)
+  - [x] n8n 연동을 통한 실전 데이터 적재 (Seeding)
+  - [x] `expression` 컬럼 인덱스 최적화 (검색 성능 향상)
 - [ ] 블로그 프론트엔드 구현
-  - [ ] 언어 감지 로직 (Locale Detection) 구현
-  - [ ] 메인/상세 페이지 UI
-  - [ ] 오디오 플레이어 구현
+  - [ ] Next.js 디자인 시스템 구축 (Premium Dark Mode)
+  - [ ] 언어 감지 로직 (Locale Detection) 및 Context Provider 구현
+  - [ ] 'Extreme Mastery' 메인 카드 UI 컴포넌트 개발
+  - [ ] 멀티 선형 오디오 플레이어 (Dialogue Player) 구현
+  - [ ] 실전 배포 및 SEO 최적화

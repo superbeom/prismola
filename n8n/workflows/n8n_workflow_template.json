@@ -49,7 +49,7 @@
             "name": "HTTP Request1",
             "credentials": {
                 "httpHeaderAuth": {
-                    "id": "1vHJDZinzU3j1Th2",
+                    "id": "your-http-header-auth-id",
                     "name": "Header Auth account"
                 }
             }
@@ -186,7 +186,7 @@
             "name": "HTTP Request",
             "credentials": {
                 "httpHeaderAuth": {
-                    "id": "1vHJDZinzU3j1Th2",
+                    "id": "your-http-header-auth-id",
                     "name": "Header Auth account"
                 }
             }

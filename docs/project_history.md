@@ -2,6 +2,29 @@
 
 > **참고**: 최신 항목이 상단에 위치합니다.
 
+## [2026-01-08] Prismola 프리미엄 2.0 (V5.1) 구조적 혁신 완료
+- **액션**: 월 $20 구독 가치에 걸맞은 '입체적 맥락 컨설팅' 프롬프트 엔진 완성.
+    - **포맷팅 최적화**: 영어 표현 필드의 전체 대문자(All Caps) 사용을 금지하고, 문맥에 따른 자연스러운 케이싱 규칙 적용.
+    - **보편적 오류 분석**: 'Fatal Mistake' 모듈을 비원어민 전체를 대상으로 하는 언어 심리학적 분석으로 확장.
+- **액션**: n8n 프리미엄 데이터 파이프라인 정렬.
+    - `04_merge_languages.js`: V5.0 신규 필드(Hook, Vibe Scale, Scene 등) 병합 로직 고도화.
+    - `05_prepare_tts_request.js`: `scene_simulation` 기반 다중 역할(A, B) TTS 생성 경로 최적화.
+- **결과**: 데이터 품질 레벨 `prismola_premium_v5` 적용 및 TTS 누락 이슈 완전 해결.
+
+## [2026-01-07] n8n 워크플로우 최적화 및 중복 방지 (Dedup Engine)
+- **액션**: 'Extreme Mastery' 생성 비용 절감을 위한 중복 체크 로직 도입.
+    - `006_enforce_unique_expression.sql`: `expression` 컬럼에 `UNIQUE` 제약 조건 추가하여 DB 수준 중복 원천 차단.
+    - `n8n_workflow_guide.md`: `0.5단계: Duplicate Check` 섹션 추가하여 n8n 노드 구성 가이드 제공. (HTTP Request + IF 조합)
+- **효과**: 이미 존재하는 표현에 대해 LLM 호출 및 TTS 생성을 건너뜀으로써 API 사용량 약 100% 절감 (중복건 기준).
+
+## [2026-01-07] n8n 데이터 파이프라인 완성
+- **액션**: n8n 'Extreme Mastery' 워크플로우의 데이터 정합성 문제 완결.
+    - 오디오 세그먼트와 메타데이터의 완벽한 병합 로직(06~08 코드 노드) 구현.
+    - 바이너리 레퍼런스 보존 로직 적용으로 오디오 유실 및 0바이트 업로드 문제 원천 해결.
+- **액션**: 데이터베이스 인프라 최적화 및 보안 권한 정립.
+    - `004_add_expression_index.sql`: `expression` 컬럼 B-Tree 인덱스 추가로 검색 및 접근 속도 향상.
+    - `005_fix_permissions.sql`: `prismola` 스키마에 대한 `anon`, `authenticated` 권한 및 RLS 정책 수정.
+
 ## [2026-01-06] 데이터베이스 스키마 고도화 및 레거시 정리 (Extreme Mastery V3.0)
 - **액션**: 'Extreme Mastery V3.0' 대응을 위한 DB 스키마 확장 및 최적화 완료.
     - `002_extreme_mastery_schema.sql`: `summary`, `tags`, `audio_segments` 신규 컬럼 및 GIN 인덱스 추가.

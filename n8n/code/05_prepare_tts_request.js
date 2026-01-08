@@ -1,5 +1,6 @@
-// n8n Code Node: Prepare Multi-Voice TTS Requests (Groq Orpheus V1)
+// n8n Code Node: Prepare Multi-Voice TTS Requests (Prismola Premium 2.0 - V5.0)
 // 대화문의 역할(A, B)에 따라 아이템을 분리(Fan-out)하고 각각 다른 목소리를 할당합니다.
+// V5.0의 scene_simulation.dialogue 구조를 반영합니다.
 
 const items = $input.all();
 let results = [];
@@ -7,13 +8,14 @@ let results = [];
 items.forEach((item, itemIndex) => {
     const data = (item.json && typeof item.json === 'object') ? item.json : {};
 
-    // 1. 영어 대화문 배열 추출 (04_merge_languages.js의 결과 구조 기준)
-    const dialogueEntries = (data.content && data.content.en && data.content.en.dialogue)
-        ? data.content.en.dialogue
-        : [];
+    // 1. 프리미엄 2.0 (V5.0) 구조에 따른 영어 대화문 배열 추출
+    // content.en.scene_simulation.dialogue 경로를 우선적으로 참조합니다.
+    const dialogueEntries = (data.content && data.content.en && data.content.en.scene_simulation && data.content.en.scene_simulation.dialogue)
+        ? data.content.en.scene_simulation.dialogue
+        : (data.content && data.content.en && data.content.en.dialogue ? data.content.en.dialogue : []);
 
     if (dialogueEntries.length === 0) {
-        // 대화문이 없는 경우 처리 (필요 시 기존 dialogue_text 활용)
+        // 대화문이 없는 경우 처리
         const fallbackText = data.dialogue_text || "";
         if (fallbackText) {
             results.push({

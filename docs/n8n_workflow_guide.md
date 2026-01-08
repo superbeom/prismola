@@ -35,9 +35,9 @@
 
 ### 📂 `n8n/code/` (핵심 로직 노드)
 - **[01_load_and_transform.js]**: 입력 데이터를 4개 국어로 분화(Fan-out).
-- **[02_construct_llm_prompt.js]**: 'Extreme Mastery' 수준의 고품질 분석 프롬프트 생성기.
+- **[02_construct_llm_prompt.js]**: 프리미엄 2.0 (V5.1) 대응. 입체적 맥락 분석 및 엄격한 대문자 방지 포맷팅 규칙 포함.
 - **[03_parse_llm_response.js]**: LLM 응답에서 JSON 데이터를 안전하게 파싱.
-- **[04_merge_languages.js]**: 다국어 데이터를 하나로 통합하여 프리미엄 DB 레코드 생성.
+- **[04_merge_languages.js]**: V5.0+ 스키마 필드(Hook, Fatal Mistake 등)를 하나로 통합하여 프리미엄 DB 레코드 생성.
 - **[05_prepare_tts_request.js]**: 대화문 역할(A, B)별 멀티 보이스 TTS 생성을 위한 분리 로직.
 - **[06_map_audio_upload.js]**: TTS 바이너리를 Supabase Storage 업로드 형식으로 매핑.
 - **[07_aggregate_audio_segments.js]**: 업로드된 오디오 URL을 수집하여 최종 배열로 병합.
@@ -55,6 +55,29 @@
 ---
 
 ## 🛠️ 노드별 세부 설정
+
+### 0.5단계: 중복 체크 (Duplicate Check) - [추가 권장]
+- **노드**: HTTP Request -> IF
+- **역할**: DB에 이미 동일한 표현(`expression`)이 존재하는지 확인하여 불필요한 API 호출(LLM, TTS)을 방지합니다.
+- **설정 (HTTP Request)**:
+    - **Method**: `GET`
+    - **URL**: `https://<YOUR_PROJECT_REF>.supabase.co/rest/v1/posts?expression=eq.{{$json.expression}}&select=id`
+    - **Headers**: `apikey: YOUR_ANON_KEY`, `Authorization: Bearer YOUR_ANON_KEY`
+- **설정 (IF)**:
+    - **Condition**: `$json` (HTTP Request의 응답)이 비어있는지 확인.
+    - **False (중복 없음)**: `1. Transform Input` 노드로 연결.
+
+> [!IMPORTANT]
+> **데이터 유실 주의 (Data Preservation)**:
+> `HTTP Request` 노드는 실행 후 입력 데이터를 응답 값으로 대체합니다. 이 경우 다음 노드에서 `expression` 필드가 `undefined`가 될 수 있습니다.
+> 
+> **해결 방법 (Best Practice)**:
+> 1.  **Merge 노드 사용**: 
+>     - `0. Load Data` -> `Merge (Input 1)`
+>     - `IF (False)` -> `Merge (Input 2)`
+>     - `Merge` 노드의 모드를 `Combine` 또는 `Wait`로 설정하여 원본 데이터를 보존하세요.
+> 2.  **직접 참조**:
+>     - `1. Transform Input` 코드 노드 내에서 `const expression = $node["0. Load Data"].json.expression;` 과 같이 원본 노드를 명시적으로 참조하세요.
 
 ### 1단계: 로드 및 변환 (Load & Transform)
 - **노드**: Code Node

@@ -2,6 +2,15 @@
 
 > **참고**: 최신 항목이 상단에 위치합니다.
 
+## [2026-01-08] 프리미엄 프론트엔드 기초 및 다국어 시스템 구축 (v5.0.0)
+- **Frontend Foundation & Refactoring**:
+  - **Design System**: Tailwind CSS v4 기반 Premium Dark Mode 테마 적용 (Glassmorphism, Gradients).
+  - **Locale System**: `context/LocaleContext` 기반 전역 상태 관리 및 `middleware.ts`(Hydration Fix) 구현.
+  - **i18n Architecture**: `i18n/` 폴더 기반 로케일 데이터 중앙화 및 `hooks/useDictionary` 구현.
+  - **Type Safety**: `types/` 폴더 분리 (`index`, `locale`, `content`, `post`) 및 엄격한 타입 적용.
+  - **UI Components**: `ExpressionCard` (Extreme Mastery V5.1) 구현.
+
+
 ## [2026-01-08] Prismola 프리미엄 2.0 (V5.1) 구조적 혁신 완료
 - **액션**: 월 $20 구독 가치에 걸맞은 '입체적 맥락 컨설팅' 프롬프트 엔진 완성.
     - **포맷팅 최적화**: 영어 표현 필드의 전체 대문자(All Caps) 사용을 금지하고, 문맥에 따른 자연스러운 케이싱 규칙 적용.

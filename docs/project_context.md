@@ -100,6 +100,11 @@ graph TD
 ```
 prismola/
 ├── app/                 # Next.js App Router Pages
+├── components/          # UI Components
+├── context/             # Global Providers (Context API)
+├── hooks/               # Custom React Hooks
+├── types/               # TypeScript Type Definitions
+├── i18n/                # Localization Dictionaries
 ├── docs/                # 프로젝트 문서 (Docs as Code)
 │   ├── project_context.md   # [SSOT] 프로젝트 규칙, 아키텍처, 상태
 │   ├── project_history.md   # 변경 이력 및 Q&A 로그

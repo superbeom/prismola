@@ -1,53 +1,23 @@
-import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import { DATABASE_SCHEMA } from "@/lib/constants";
 
 export async function middleware(request: NextRequest) {
-  // NOTE: Supabase Auth logic is temporarily disabled until user authentication is implemented.
-  // When 'profiles' table and login features are added (see future_todos.md),
-  // uncomment the code below to enable session refreshing.
+  let locale = request.cookies.get("prismola-locale")?.value;
 
-  return NextResponse.next();
-
-  /*
-  let supabaseResponse = NextResponse.next({
-    request,
-  });
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      db: { schema: DATABASE_SCHEMA },
-      cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            request.cookies.set(name, value)
-          );
-          supabaseResponse = NextResponse.next({
-            request,
-          });
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
-          );
-        },
-      },
+  if (!locale) {
+    const acceptLanguage = request.headers.get("accept-language");
+    if (acceptLanguage) {
+      if (acceptLanguage.includes("ko")) locale = "ko";
+      else if (acceptLanguage.includes("ja")) locale = "ja";
+      else if (acceptLanguage.includes("es")) locale = "es";
     }
-  );
+  }
 
-  // IMPORTANT: Avoid writing any logic between createServerClient and
-  // supabase.auth.getUser(). A simple mistake could make it very hard to debug
-  // issues with users being randomly logged out.
+  locale = locale || "en";
 
-  // Refresh session if expired - required for Server Components
-  // https://supabase.com/docs/guides/auth/server-side/nextjs
-  await supabase.auth.getUser();
+  const response = NextResponse.next();
+  response.headers.set("x-prismola-locale", locale);
 
-  return supabaseResponse;
-  */
+  return response;
 }
 
 export const config = {

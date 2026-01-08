@@ -24,7 +24,7 @@ if (!expression) {
         const originalData = $("0. Load Data").first().json;
         expression = originalData.expression || originalData.word;
         url = originalData.url || originalData.source_url || url;
-    } catch (e) {
+    } catch {
         // 직접 참조 실패 시 에러 메시지 생성을 위해 통과
     }
 }

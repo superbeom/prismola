@@ -2,7 +2,6 @@
 // Adaptation for Groq/OpenAI response format
 
 const items = $input.all();
-const returnData = [];
 
 return items.map((item, index) => {
     const response = item.json;
@@ -22,7 +21,7 @@ return items.map((item, index) => {
     try {
         const cleanStr = contentStr.replace(/```json/g, "").replace(/```/g, "").trim();
         parsedContent = JSON.parse(cleanStr);
-    } catch (error) {
+    } catch {
         parsedContent = { error: "Failed to parse JSON", raw: contentStr };
     }
 

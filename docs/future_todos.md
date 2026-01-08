@@ -12,3 +12,7 @@
 
 - [ ] (예시) `any` 타입 제거 및 엄격한 타입 정의 적용
 - [ ] (예시) 중복되는 유틸리티 함수 리팩토링
+- [ ] **Locale 로직 중앙화 및 UI 다국어 확장**:
+  - `temp.ts` 참고하여 서버 컴포넌트용 `getLocale`, `getI18n` 헬퍼 함수 구현 (Centralized Management).
+  - 현재 `layout.tsx` 등에 산재된 헤더 파싱 로직을 리팩토링.
+  - 추후 Prismola UI 전체를 4개 국어(EN, KO, JA, ES)로 확장하기 위한 `dictionary` 구조 준비.

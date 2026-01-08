@@ -4,6 +4,45 @@
 
 ---
 
+## v5.0.0: 프리미엄 프론트엔드 기초 및 다국어 시스템 구축
+**날짜**: 2026-01-08
+
+### 목표
+Next.js 기반의 프리미엄 다크 모드 디자인 시스템을 구축하고, 다국어 감지 및 'Extreme Mastery' UI를 구현합니다.
+
+### 수행 단계
+1.  **디자인 시스템 구축**:
+    - Tailwind CSS v4를 활용한 프리미엄 다크 모드 테마 설정.
+    - `prism-gradient`, `glass-card`, `noise-overlay` 등 커스텀 유틸리티 구현.
+    - 'Outfit' (Heading) 및 'Inter' (Body) 폰트 시스템 통합.
+2.  **다국어 로직 구현**:
+    - `middleware.ts`를 통한 브라우저 언어 자동 감지 및 Fallback(EN) 처리.
+    - `context/LocaleContext` 및 `useLocale` 훅을 통한 전역 언어 상태 관리.
+3.  **마스터리 카드 UI 개발**:
+    - 'Premium 2.0' 포맷에 최적화된 `ExpressionCard` 컴포넌트 개발.
+    - 9개 핵심 섹션(Hook, Fatal Mistake, Vibe Scale 등)의 입체적 레이아웃 구현.
+4.  **검증**:
+    - 브라우저 자동화 도구를 사용하여 로컬 서버(`http://localhost:3000`)의 UI 렌더링 및 스타일 검증 완료.
+5.  **Refactoring & Architecture Enforcement**:
+    - **Types Separation**: `types/` 폴더를 생성하고 `types/index.ts`, `types/locale.ts` 등으로 세분화하여 유지보수성 향상.
+    - **Context Refactoring**: `components/providers/LocaleProvider.tsx`를 `context/LocaleContext.tsx`로 이동하여 역할 명확화.
+    - **i18n Centralization**: `dictionaries/`를 `i18n/`으로 변경하고, `hooks/useDictionary.ts`를 구현하여 UI 텍스트 관리 로직 중앙화.
+
+### 검증 결과 (Pass)
+
+````carousel
+![Prismola Landing Page](/Users/jamesbond/.gemini/antigravity/brain/42d9bde3-8ead-484a-962c-4f22658e06b7/landing_page_full_1767844042441.png)
+<!-- slide -->
+![Mastery Format Header](/Users/jamesbond/.gemini/antigravity/brain/42d9bde3-8ead-484a-962c-4f22658e06b7/mastery_format_header_verification_1767844662873.png)
+<!-- slide -->
+![Expression Card Details](/Users/jamesbond/.gemini/antigravity/brain/42d9bde3-8ead-484a-962c-4f22658e06b7/expression_card_details_verification_1767844677717.png)
+<!-- slide -->
+![UI Verification Record](/Users/jamesbond/.gemini/antigravity/brain/42d9bde3-8ead-484a-962c-4f22658e06b7/prismola_mastery_card_view_1767844620489.webp)
+````
+
+---
+
+
 ## v3.2.0: 인프라 최적화 및 디자인 시스템 기반 구축
 **날짜**: 2026-01-07
 

@@ -31,9 +31,9 @@
   - [x] DB 권한 및 RLS 정책 수정 (Permission Denied 해결)
   - [x] n8n 연동을 통한 실전 데이터 적재 (Seeding)
   - [x] `expression` 컬럼 인덱스 최적화 (검색 성능 향상)
-- [ ] 블로그 프론트엔드 구현
-  - [ ] Next.js 디자인 시스템 구축 (Premium Dark Mode)
-  - [ ] 언어 감지 로직 (Locale Detection) 및 Context Provider 구현
-  - [ ] 'Extreme Mastery' 메인 카드 UI 컴포넌트 개발
+- [/] 블로그 프론트엔드 구현
+  - [x] Next.js 디자인 시스템 구축 (Premium Dark Mode)
+  - [x] 언어 감지 로직 (Locale Detection) 및 Context Provider 구현
+  - [x] 'Extreme Mastery' 메인 카드 UI 컴포넌트 개발
   - [ ] 멀티 선형 오디오 플레이어 (Dialogue Player) 구현
   - [ ] 실전 배포 및 SEO 최적화

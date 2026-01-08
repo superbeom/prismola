@@ -1,6 +1,6 @@
 # 데이터베이스 스키마 (Database Schema)
 
-**최종 수정일**: 2026-01-05
+**최종 수정일**: 2026-01-08
 
 `Prismola` 프로젝트의 데이터베이스 설계 문서입니다. Supabase (PostgreSQL)를 사용합니다.
 
@@ -13,8 +13,9 @@
 | `id` | `uuid` | Primary Key. 기본값 `gen_random_uuid()`. |
 | `expression` | `text` | 핵심 영어 표현 (예: "Cold feet"). 검색 및 인덱싱 용도. |
 | `content` | `jsonb` | **핵심**. 4개 국어 콘텐츠 데이터를 담는 JSON 객체. |
-| `audio_url` | `text` | Supabase Storage에 저장된 오디오 파일 URL. |
-| `image_url` | `text` | (Optional) 대표 이미지 URL. |
+| `summary` | `jsonb` | UI 리스트 뷰를 위한 다국어 요약 설명. |
+| `tags` | `text[]` | 콘텐츠에서 추출된 검색 가능한 태그 배열. |
+| `audio_segments` | `jsonb` | 역할별(Speaker) 오디오 URL 및 메타데이터 배열. |
 | `created_at` | `timestamptz` | 생성 일시. 기본값 `now()`. |
 | `updated_at` | `timestamptz` | 수정 일시. |
 
@@ -22,37 +23,48 @@
 
 `content` 컬럼은 다음과 같은 계층 구조를 가집니다. 언어별 키(`en`, `ko`, `ja`, `es`) 아래에 해당 언어의 로컬라이즈된 콘텐츠가 들어갑니다.
 
-### 스키마 예시
+### 스키마 예시 (V5.1)
 
 ```json
 {
   "en": {
-    "title": "Stop saying 'I think'",
-    "nuance": "Used when you want to sound more confident...",
-    "intro": "Have you ever felt ignored in a meeting?",
-    "dialogue": [
-      { "speaker": "A", "text": "..." },
-      { "speaker": "B", "text": "..." }
-    ],
-    "mission": "Try using this in your next email."
+    "hook": "Strategic Title",
+    "expression": "go ahead",
+    "meaning": "permission · proceed",
+    "fatal_mistake": {
+      "trap": "Direct translation trap",
+      "reason": "Why it fails",
+      "fix": "How to fix"
+    },
+    "vibe_intensity_scale": "5",
+    "micro_nuance_analysis": "Deep psyche analysis...",
+    "social_intelligence_map": {
+      "etiquette_guide": "...",
+      "vibe_summary": "...",
+      "shadow_vibe": "..."
+    },
+    "contrastive_mastery": {
+      "synonym_hierarchy": [
+        { "word": "Proceed", "vibe": "Formal", "confidence": "High" }
+      ],
+      "why_this_wins": "..."
+    },
+    "scene_simulation": {
+      "scene": "...",
+      "dialogue": [
+        { "role": "A", "en": "...", "translation": "...", "intent": "..." }
+      ]
+    },
+    "mission": "Daily mission",
+    "extreme_iq_quiz": {
+      "scenario": "...",
+      "question": "...",
+      "options": { "A": "...", "B": "..." },
+      "answer": "A",
+      "social_calibration_feedback": "..."
+    }
   },
-  "ko": {
-    "title": "아직도 'I think'만 쓰시나요?",
-    "nuance": "더 자신감 있게 의견을 말하고 싶을 때...",
-    "intro": "회의 시간에 내 의견이 묻히는 것 같나요?",
-    "dialogue": [ ... ], // 영어 대화문은 동일하더라도 설명이 다를 수 있음
-    "mission": "다음 이메일에 이렇게 써보세요."
-  },
-  "ja": {
-    "title": "...",
-    "nuance": "...",
-    ...
-  },
-  "es": {
-    "title": "...",
-    "nuance": "...",
-    ...
-  }
+  "ko": { ... }
 }
 ```
 

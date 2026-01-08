@@ -4,6 +4,60 @@
 
 ---
 
+## v3.2.0: 인프라 최적화 및 디자인 시스템 기반 구축
+**날짜**: 2026-01-07
+
+### 목표
+데이터베이스 성능 및 권한 이슈를 해결합니다.
+
+### 수행 단계
+- **DB 성능 및 보안 강화**:
+    - **인덱싱**: `expression` 컬럼에 B-Tree 인덱스를 추가하여 대량 데이터 검색 최적화.
+    - **권한 관리**: `005_fix_permissions.sql`을 통해 n8n 및 앱의 스키마 접근 에러(Permission Denied) 해결.
+
+### 검증 결과 (Pass)
+- **DB 검색**: 인덱스 적용 후 조회 속도 체감 수준 향상.
+- **권한**: n8n의 `prismola` 스키마 내 데이터 `Upsert` 정상 작동 확인.
+
+---
+
+## v3.1.0: Audio Aggregation & Merge Logic 검증 완료
+**날짜**: 2026-01-07
+
+### 목표
+n8n 워크플로우 내에서 개별 업로드된 오디오 세그먼트와 LLM 메타데이터를 유실 없이 병합하여 최종 DB Upsert용 데이터를 생성합니다.
+
+### 수행 단계
+1.  **Merge 노드 통합**: Supabase Storage 업로드 결과와 원본 메타데이터(Node 06)를 병합하도록 워크플로우 구조 개선.
+2.  **데이터 무결성 검증**: `example_output.json` 분석 결과, 4개 국어 콘텐츠와 오디오 URL(`audio_segments`)이 완벽하게 매핑됨을 확인.
+3.  **방어 코드 적용**: `07_aggregate_audio_segments.js` 및 `08_prepare_final_upsert.js`에 데이터 유실 시 에러를 발생시키는 검증 로직 추가.
+
+### 검증 결과 (Pass)
+- **Expression**: "go ahead" 매핑 성공.
+- **Multi-language Content**: en, ko, ja, es 모든 필드 데이터 존재.
+- **Audio Segments**: Hannah & Troy 목소리별 3개 세그먼트 URL(Supabase Storage) 정상 수집.
+- **Schema Match**: `database_schema.md`에서 정의한 `JSONB` 구조와 100% 일치.
+
+---
+
+## v3.0.0: 'Extreme Mastery' n8n 워크플로우 고도화
+**날짜**: 2026-01-06
+
+### 목표
+유료 서비스급($20 value) 고품질 언어 분석 콘텐츠 자동 생성 및 다중 보이스 TTS 시스템을 구축합니다.
+
+### 수행 단계
+1.  **Extreme Mastery 엔진 구축**:
+    - **Fan-out 구조**: 하나의 표현을 4개 국어(en, ko, ja, es)로 분화하여 Groq API 병렬 처리.
+    - **심층 프롬프트 (02_code)**: 비언어적 뉘앙스, 사회적 지능(Etiquette), 유의어 대비 맵 포함.
+    - **통합 병합 (04_code)**: 분산된 4개 국어 데이터를 단일 JSONB 레코드로 완벽하게 머지.
+2.  **Multi-Voice TTS 통합**:
+    - **역할 분파 (05_code)**: 대화문을 문장 단위로 쪼개고 화자(A/B)별 목소리 할당.
+    - **고음질 생성**: Groq Orpheus 모델을 활용하여 Hannah(여성) & Troy(남성) 음성 생성.
+3.  **관리 체계 수립**:
+    - `n8n/code/` 폴더 내에 로직 문서화.
+    - `n8n_workflow_guide.md` 마스터 가이드 배포.
+
 ## v0.2.0: Supabase 데이터베이스 통합
 **날짜**: 2026-01-05
 

@@ -4,17 +4,36 @@
   - [x] 시스템 아키텍처 정의 (Google Sheets -> n8n -> Supabase -> Blog)
   - [x] 다국어 전략: 4개 국어(EN/KO/JA/ES) 생성 및 JSONB 저장
   - [x] UX 전략: 브라우저 언어 자동 감지 (Auto-detect)
-- [ ] 프로젝트 셋업
+- [x] 프로젝트 셋업
   - [x] Next.js 프로젝트 초기화 (`prismola`)
   - [x] 문서화 및 컨텍스트 규칙 설정 (`docs/` & Workflows)
   - [x] Supabase 프로젝트 생성 및 테이블(JSONB 적용) 설정
-  - [ ] Google Sheets 데이터 소스 준비
-- [ ] n8n 워크플로우 구현
-  - [ ] Google Sheets 데이터 읽기
-  - [ ] LLM: 4개 국어 콘텐츠(JSON 구조) 생성 프롬프트 작성
-  - [ ] TTS: 영어 대화문 음성 생성
-  - [ ] Supabase: JSON 데이터 및 미디어 업로드
+  - [x] Google Sheets 데이터 소스 준비 (-> Scraper & CSV 대체)
+- [x] n8n 워크플로우 구현 & 최적화
+  - [x] 데이터 로드 로직 구현 (Scraper output 사용)
+  - [x] LLM: 프리미엄 2.0 (V5.1) 심층 언어 분석 콘텐츠 생성 프롬프트 완성
+    - [x] $20/월 가치의 입체적 맥락 컨설팅 모듈 설계
+    - [x] 영어 표현 포맷팅 최적화 (All Caps 방지)
+    - [x] 보편적 Fatal Mistake 분석 로직 도입
+  - [x] TTS: 역할별 멀티 보이스 음성 생성 로직 구현 (V5.0 대응)
+  - [x] 다국어 데이터 병합 및 최적화
+  - [x] 중복 데이터 생성 방지 로직 (Duplicate Check) 구현
+    - [x] DB 유니크 제약 조건 추가 (`006_enforce_unique_expression.sql`)
+    - [x] n8n 중복 조회 노드 추가 및 가이드 업데이트
+  - [x] 문서화 및 가이드 작성
+    - [x] 디렉토리 구조 섹션 추가
+    - [x] 사용 방법 및 주의사항 섹션 추가
+    - [x] 가이드 본문 보강 (n8n JSON 임포트 안내 등)
+  - [x] 최종 워크플로우 템플릿 제공 및 안내
+- [x] 데이터베이스 고도화 및 데이터 업로드
+  - [x] DB 테이블 구조 최적화 (Extreme Mastery V3.0 대응)
+  - [x] 오디오 세그먼트 저장을 위한 스키마 확장
+  - [x] DB 권한 및 RLS 정책 수정 (Permission Denied 해결)
+  - [x] n8n 연동을 통한 실전 데이터 적재 (Seeding)
+  - [x] `expression` 컬럼 인덱스 최적화 (검색 성능 향상)
 - [ ] 블로그 프론트엔드 구현
-  - [ ] 언어 감지 로직 (Locale Detection) 구현
-  - [ ] 메인/상세 페이지 UI
-  - [ ] 오디오 플레이어
+  - [ ] Next.js 디자인 시스템 구축 (Premium Dark Mode)
+  - [ ] 언어 감지 로직 (Locale Detection) 및 Context Provider 구현
+  - [ ] 'Extreme Mastery' 메인 카드 UI 컴포넌트 개발
+  - [ ] 멀티 선형 오디오 플레이어 (Dialogue Player) 구현
+  - [ ] 실전 배포 및 SEO 최적화
